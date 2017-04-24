@@ -2,7 +2,7 @@
   "name": "steam-saver-screenshot-server",
   "version": "1.0.0",
   "description": "",
-  "main": "tray.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "electron": "^1.6.6",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.2.1"
   }
 }
