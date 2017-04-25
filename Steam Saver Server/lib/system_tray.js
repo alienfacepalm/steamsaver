@@ -12,7 +12,8 @@ class SystemTray {
 
 	  this.server = server;
 
-      const iconPath = path.join(__dirname, '../assets/icon.png');
+	  const color = process.platform === 'win32' ? 'white' : 'black';
+      const iconPath = path.join(__dirname, `../assets/icon-${color}.png`);
 	  appIcon = this.icon = new Tray(iconPath);
 
 	  const contextMenu = Menu.buildFromTemplate([
