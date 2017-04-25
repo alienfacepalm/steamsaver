@@ -20,14 +20,14 @@ class SystemTray {
 	      label: 'Settings',
 	      submenu: [
 	        { 
-	          label: 'Manage Directories',
+	          label: 'Show Address',
 	          click: () => {
 	            win.show();
 	          }
 	        }
 	      ]
 	    },
-	    {
+	   /* {
 	      label: 'Server',
 	      submenu: [
 	         {
@@ -37,7 +37,7 @@ class SystemTray {
 	            }
 	         }
 	      ]
-	    },
+	    },*/
 	    {
 	      label: 'Options',
 	      submenu: [
