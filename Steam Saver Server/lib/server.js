@@ -1,5 +1,6 @@
 const {ipcMain} = require('electron');
 const express = require('express');
+const fs = require('fs');
 const ip = require('ip');
 
 const Screenshots = require('./screenshots');
@@ -15,6 +16,7 @@ class Server {
 		this.PORT = port;
 		this.app = null;
 		this.server = null;
+		this.screenshots = [];
 
 		return instance;
 	}
@@ -38,15 +40,27 @@ class Server {
 			let screenshots = new Screenshots;
   			screenshots.list()
 	  			.then(screenshots => {
-	  				this.feed(screenshots);
+	  				this.screenshots = screenshots;
+	  				this.feed();
 	  			})
 	  			.catch(error => console.error(error));
 		});
 	}
 
-	feed(screenshots){
-		this.app.get('/', (request, response) => {
-			response.json(screenshots);
+	feed(){
+		this.app.get('/:uuid?', (request, response) => {
+			let uuid = request.params.uuid;
+			if(uuid){
+				//serve the file as a jpg
+				let file = this.screenshots.filter(screenshot => screenshot.id === uuid);
+				fs.readFile(file[0].path, (error, buffer) => {
+					response.writeHead(200, {"Content-Type": "image/jpeg"});
+					response.end(buffer, 'binary');
+				});
+			}else{
+				//serve the list
+				response.json(this.screenshots);
+			}
 		});
 	}
 

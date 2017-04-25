@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const uuidV4 = require('uuid/v4');
+const uuid = require('uuid');
 
 const settings = require('../settings'); 
 
@@ -33,7 +33,8 @@ class Screenshots {
 	    }else{
 	      	if(this.validExtensions.includes(path.extname(file))){
 	      		let filepath = path.resolve(dir+'/'+file);
-	      		filelist.push({id: uuidV4(), file: filepath});;	
+
+	      		filelist.push({id: uuid.v4(filepath), path: filepath});;	
 			}
 	    }
 	  });
