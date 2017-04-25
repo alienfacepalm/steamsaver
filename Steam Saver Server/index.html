@@ -3,13 +3,20 @@
   <head>
     <meta charset="UTF-8">
     <title>Steam Saver</title>
-    <script>require('node_modules/jquery/dist/jquery.min.js');</script>
-    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald"/>
+    <link rel="stylesheet" href="app.css"/>
   </head>
   <body>
     <div id="settings-container">
-
+      <div>
+        <i id="close" class="fa fa-window-close"></i>
+        <i id="tv-icon" class="fa fa-television text-large"></i>
+        <p class="sub-head">Enter this address on your Roku under the SteamSaver settings</p>
+        <div id="address" class="inline">255.255.255.255</div>
+      </div>
     </div>
   </body>
-  <script>require('./renderer.js')</script>
+  <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');</script>
+  <script>require('./renderer.js');</script>
 </html>

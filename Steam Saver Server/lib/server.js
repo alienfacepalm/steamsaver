@@ -1,4 +1,6 @@
+const {ipcMain} = require('electron');
 const express = require('express');
+const ip = require('ip');
 
 const Screenshots = require('./screenshots');
 
@@ -6,7 +8,7 @@ let instance = null;
 
 class Server {
 
-	constructor(port){
+	constructor(port, win){
 		if(!instance){
 			instance = this;
 		}
@@ -21,12 +23,16 @@ class Server {
 		return this.server ? true : false;
 	}
 
+	initialize(win){
+		this.start();
+	}
+
 	start(){
 		console.log(`Starting HTTP Server`);
 
 		this.app = express();
 
-		this.server = this.app.listen(this.PORT || 3333, () => {
+		this.server = this.app.listen(this.PORT || 10003, () => {
 			console.log(`SteamSaver Server is running on ${this.PORT}`);
 
 			let screenshots = new Screenshots;
@@ -35,7 +41,6 @@ class Server {
 	  				this.feed(screenshots);
 	  			})
 	  			.catch(error => console.error(error));
-
 		});
 	}
 

@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const directories = require('../directories'); 
+const settings = require('../settings'); 
 
 class Screenshots {
 
 	constructor(){
 		this.validExtensions = ['.jpg', '.png'];
-		this.searchDirectories = directories; 
+		this.searchDirectories = settings.directories; 
 	}
 
 	list(){

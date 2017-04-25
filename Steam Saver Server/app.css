@@ -1,0 +1,38 @@
+html, body {
+	margin: 0 auto;
+	text-align: center;
+	background: #00adee;
+	font-family: 'Oswald', sans-serif;
+}
+
+#address {
+	padding-top: 10px;
+	margin: 0 auto;
+	font-size: 12vmin;
+	color: white;
+}
+
+#close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	font-size: 5vmin;
+	color: white;
+	cursor: pointer;
+}
+
+#tv-icon {
+	padding-top: 100px;
+	color: white;
+	font-size: 25vmin;
+}
+
+.inline {
+	display: inline;
+}
+
+.sub-head {
+	padding-top: 10px;
+	color: white;
+	font-size: 5vmin;
+}
