@@ -15,7 +15,6 @@ app.on('ready', () => {
   
   const server = new Server(PORT);
   server.start();
-  //server.feed(screenshots);
 
   let systemTray = new SystemTray;
   systemTray.initialize(win, appIcon, server);

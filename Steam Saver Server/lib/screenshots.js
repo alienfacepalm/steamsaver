@@ -1,11 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
+const directories = require('../directories'); 
+
 class Screenshots {
 
 	constructor(){
-		this.validExtensions = ['.jpg', '.png']; //TODO: configurable
-		this.searchDirectories = ['G:\\Games\\userdata\\64952127\\760\\remote'];  //TODO: configurable
+		this.validExtensions = ['.jpg', '.png'];
+		this.searchDirectories = directories; 
 	}
 
 	list(){
@@ -29,7 +31,7 @@ class Screenshots {
 	      filelist = this.walkSync(dir+'/'+file, filelist);
 	    }else{
 	      	if(this.validExtensions.includes(path.extname(file))){
-				filelist.push(path.resolve(file));
+				filelist.push(path.resolve(dir+'/'+file));
 			}
 	    }
 	  });
