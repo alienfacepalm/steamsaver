@@ -33,7 +33,6 @@ class Screenshots {
 	    }else{
 	      	if(this.validExtensions.includes(path.extname(file))){
 	      		let filepath = path.resolve(dir+'/'+file);
-
 	      		filelist.push({id: uuid.v4(filepath), path: filepath});;	
 			}
 	    }

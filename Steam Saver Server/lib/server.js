@@ -51,12 +51,16 @@ class Server {
 		this.app.get('/:uuid?', (request, response) => {
 			let uuid = request.params.uuid;
 			if(uuid){
-				//serve the file as a jpg
-				let file = this.screenshots.filter(screenshot => screenshot.id === uuid);
-				fs.readFile(file[0].path, (error, buffer) => {
-					response.writeHead(200, {"Content-Type": "image/jpeg"});
-					response.end(buffer, 'binary');
-				});
+				try{
+					let file = this.screenshots.filter(screenshot => screenshot.id === uuid);
+					fs.readFile(file[0].path, (error, buffer) => {
+						response.writeHead(200, {"Content-Type": "image/jpeg"});
+						response.end(buffer, 'binary');
+					});
+				}catch(error){
+					response.writeHead(404);
+					response.end("File Not Found");
+				}
 			}else{
 				//serve the list
 				response.json(this.screenshots);
