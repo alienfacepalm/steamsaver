@@ -1,4 +1,4 @@
-const {Tray, Menu} = require('electron');
+const {app, Tray, Menu} = require('electron');
 const path = require('path');
 
 class SystemTray {
@@ -53,6 +53,9 @@ class SystemTray {
 	    { 
 	      label: 'Quit',
 	      selector: 'terminate:',
+	      click: () => {
+	      	app.quit();
+	      }
 	    }
 	  ]);
 	  appIcon.setToolTip(`Steam Saver`);
