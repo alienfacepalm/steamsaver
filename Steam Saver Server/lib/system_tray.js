@@ -27,17 +27,6 @@ class SystemTray {
 	        }
 	      ]
 	    },
-	   /* {
-	      label: 'Server',
-	      submenu: [
-	         {
-	            label: "Toggle",
-	            click: () => {
-	                this.server.running ? this.server.stop() : this.server.start()
-	            }
-	         }
-	      ]
-	    },*/
 	    {
 	      label: 'Options',
 	      submenu: [

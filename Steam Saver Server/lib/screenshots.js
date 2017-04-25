@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const uuidV4 = require('uuid/v4');
 
 const settings = require('../settings'); 
 
@@ -31,7 +32,8 @@ class Screenshots {
 	      filelist = this.walkSync(dir+'/'+file, filelist);
 	    }else{
 	      	if(this.validExtensions.includes(path.extname(file))){
-				filelist.push(path.resolve(dir+'/'+file));
+	      		let filepath = path.resolve(dir+'/'+file);
+	      		filelist.push({id: uuidV4(), file: filepath});;	
 			}
 	    }
 	  });
