@@ -4,20 +4,18 @@ const path = require('path');
 class Screenshots {
 
 	constructor(){
-		//TODO: store list of paths in local db
-		this.validExtensions = ['.jpg', '.png'];
-		this._screenshots = [];
-		this.searchDirectories = ['G:\\Games\\userdata\\64952127\\760\\remote'];
+		this.validExtensions = ['.jpg', '.png']; //TODO: configurable
+		this.searchDirectories = ['G:\\Games\\userdata\\64952127\\760\\remote'];  //TODO: configurable
 	}
 
-	get screenshots(){
-		return this._screenshots;
+	list(){
+		return Promise.resolve(this.get());
 	}
 
-	initialize(){
-		this.scan(this.searchDirectories).then(screenshots => {
-			this._screenshots = screenshots;
-		}).catch(error => console.error(error));
+	get(){
+		return this.scan(this.searchDirectories)
+				 .then(screenshots => screenshots[0])
+				 .catch(error => console.error(error));
 	}
 
 	scan(directories){
@@ -27,15 +25,16 @@ class Screenshots {
 	walkSync(dir, filelist=[]) {
 	  let files = fs.readdirSync(dir);
 	  files.forEach(file => {
-	    if (fs.statSync(dir + '/' + file).isDirectory()) {
-	      filelist = this.walkSync(dir + '/' + file, filelist);
-	    } else {
+	    if (fs.statSync(dir+'/'+file).isDirectory()) {
+	      filelist = this.walkSync(dir+'/'+file, filelist);
+	    }else{
 	      	if(this.validExtensions.includes(path.extname(file))){
 				filelist.push(path.resolve(file));
 			}
 	    }
 	  });
-	  return filelist;
+	  let unique = [...new Set(filelist)];
+	  return unique;
 	}
 
 }
