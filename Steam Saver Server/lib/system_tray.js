@@ -58,7 +58,7 @@ class SystemTray {
 	      }
 	    }
 	  ]);
-	  appIcon.setToolTip(`Steam Saver`);
+	  appIcon.setToolTip(`SteamSaver`);
 	  appIcon.setContextMenu(contextMenu);
 
 	}
