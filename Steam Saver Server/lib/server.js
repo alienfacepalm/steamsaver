@@ -1,4 +1,3 @@
-const {ipcMain} = require('electron');
 const express = require('express');
 const fs = require('fs');
 const ip = require('ip');

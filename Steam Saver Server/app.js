@@ -6,10 +6,9 @@ const ip = require('ip');
 const Server = require('./lib/server');
 const SystemTray = require('./lib/system_tray');
 const Screenshots = require('./lib/screenshots');
+const Settings = require('./lib/settings');
 
-const settings = require('./settings'); 
-
-const port = settings.port;
+const port = require('./settings').port;
 
 let win = null;
 let appIcon = null;
@@ -17,6 +16,8 @@ let appIcon = null;
 app.on('ready', () => {
   win = new BrowserWindow({width: 1024, height:600, frame: false});
   win.setMenu(null);
+
+  const settings = new Settings(app.getPath('userData'));
 
   const server = new Server(app, port);
   server.initialize();
@@ -33,6 +34,10 @@ app.on('ready', () => {
 
   ipcMain.on('close-click', () => {
     win.hide();
+  });
+
+  ipcMain.on('add-directory-click', (directory) => {
+    //this.settings.save() the directory;
   });
 
   ipcMain.on('dom-ready', () => {

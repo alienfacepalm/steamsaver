@@ -21,7 +21,7 @@ class SystemTray {
 	      label: 'Settings',
 	      submenu: [
 	        { 
-	          label: 'Show Address',
+	          label: 'Manager',
 	          click: () => {
 	            win.show();
 	          }
