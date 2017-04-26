@@ -9,18 +9,17 @@ const Screenshots = require('./lib/screenshots');
 
 const settings = require('./settings'); 
 
-const PORT = settings.port;
+const port = settings.port;
 
 let win = null;
 let appIcon = null;
 
 app.on('ready', () => {
-
   win = new BrowserWindow({width: 1024, height:600, frame: false});
   win.setMenu(null);
 
-  const server = new Server(PORT, win);
-  server.initialize(win);
+  const server = new Server(app, port);
+  server.initialize();
 
   let systemTray = new SystemTray;
   systemTray.initialize(win, appIcon, server);
@@ -37,8 +36,7 @@ app.on('ready', () => {
   });
 
   ipcMain.on('dom-ready', () => {
-    console.log(`DOM ready send info`);
-    win.webContents.send('address', `http://${ip.address()}:${PORT}`);
+    win.webContents.send('address', `http://${ip.address()}:${port}`);
   });
 
 });

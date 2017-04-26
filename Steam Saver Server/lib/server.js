@@ -2,21 +2,25 @@ const {ipcMain} = require('electron');
 const express = require('express');
 const fs = require('fs');
 const ip = require('ip');
+const path = require('path')
 
 const Screenshots = require('./screenshots');
+const Settings = require('./settings');
 
 let instance = null;
 
 class Server {
 
-	constructor(port, win){
+	constructor(app, port){
 		if(!instance){
 			instance = this;
 		}
-		this.PORT = port;
-		this.app = null;
+		this.port = port;
+		this.app = app;
+		this.expressApp = null;
 		this.server = null;
 		this.screenshots = [];
+		this.settings = null;
 
 		return instance;
 	}
@@ -25,17 +29,29 @@ class Server {
 		return this.server ? true : false;
 	}
 
-	initialize(win){
+	initialize(){
 		this.start();
+
+		//Store settings document in neDB
+		
+		this.settings = new Settings(this.app.getPath('userData'));
+		/*
+		this.settings.save({port: 10003, directories: [
+			path.resolve('G:/Games/userdata/64952127/760/remote'),
+			path.resolve('X:/Pictures')
+		]})
+		.then(settings => console.log(settings._id, 'saved!'));
+		*/
+		let settings = this.settings.get().then(settings => console.log(`Settings From DB`, settings));
 	}
 
 	start(){
 		console.log(`Starting HTTP Server`);
 
-		this.app = express();
+		this.expressApp = express();
 
-		this.server = this.app.listen(this.PORT || 10003, () => {
-			console.log(`SteamSaver Server is running on ${this.PORT}`);
+		this.server = this.expressApp.listen(this.port || 10003, () => {
+			console.log(`SteamSaver Server is running on ${this.port}`);
 
 			let screenshots = new Screenshots;
   			screenshots.list()
@@ -48,7 +64,7 @@ class Server {
 	}
 
 	feed(){
-		this.app.get('/:uuid?', (request, response) => {
+		this.expressApp.get('/:uuid?', (request, response) => {
 			let uuid = request.params.uuid;
 			if(uuid){
 				try{
