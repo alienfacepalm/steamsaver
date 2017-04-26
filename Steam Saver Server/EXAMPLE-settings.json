@@ -1,7 +1,9 @@
+//Copy this file and name the copy settings.json
+//Open settings.json and change the directory paths to where you want the software to scan for images
 {
 	"port": 10003,
 	"directories": [
-		"X:\\PICTURES",
-		"G:\\Games\\userdata\\64952127\\760\\remote"
+		"%UserProfile%\\My\\ Pictures",
+		"C:\\Program\\ Files\\Steam\\userdata\\64952127\\760\\remote"
 	]
 }	
